@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -63,15 +64,7 @@ public class GUI_GLUCOSA extends JFrame {
 		lblNewLabel_3.setBounds(201, 161, 118, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		JButton btnNewButton = new JButton("REGISTRAR");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(210, 245, 98, 33);
-		contentPane.add(btnNewButton);
-		
-		textField = new JTextField();
+		textField = new JTextField((java.time.LocalDate.now().toString()));
 		textField.setBounds(201, 195, 107, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -85,6 +78,22 @@ public class GUI_GLUCOSA extends JFrame {
 		textField_2.setBounds(193, 116, 126, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
+		
+		JButton btnNewButton = new JButton("REGISTRAR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fecha = textField.getText();
+			    if (!fecha.contains("-")) {
+			        JOptionPane.showMessageDialog(null, "Introduce con formato AAAA-MM-DD");
+			        return;
+			    }
+			    String nombre = textField_2.getText();
+			    float glucosa = Float.parseFloat(textField_1.getText());
+			}
+		});
+		btnNewButton.setBounds(210, 245, 98, 33);
+		contentPane.add(btnNewButton);
+		
 
 	}
 }
