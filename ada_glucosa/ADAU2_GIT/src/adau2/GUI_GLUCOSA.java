@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class GUI_GLUCOSA extends JFrame {
@@ -20,6 +21,7 @@ public class GUI_GLUCOSA extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	ArrayList<Manejoregistro> datos= new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -89,6 +91,7 @@ public class GUI_GLUCOSA extends JFrame {
 			    }
 			    String nombre = textField_2.getText();
 			    float glucosa = Float.parseFloat(textField_1.getText());
+			    datos.add(new Manejoregistro(nombre, glucosa, fecha));
 			}
 		});
 		btnNewButton.setBounds(210, 245, 98, 33);
