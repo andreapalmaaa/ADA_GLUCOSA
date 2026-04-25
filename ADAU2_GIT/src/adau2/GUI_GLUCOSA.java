@@ -1,5 +1,6 @@
 package adau2;
 
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -92,7 +93,7 @@ public class GUI_GLUCOSA extends JFrame {
         btnNewButton.setBounds(201, 244, 118, 33);
         contentPane.add(btnNewButton);
 
-        //Buscador
+        //Buscador Emilio
         JPanel panelBuscador = new JPanel();
         panelBuscador.setLayout(null);
 
