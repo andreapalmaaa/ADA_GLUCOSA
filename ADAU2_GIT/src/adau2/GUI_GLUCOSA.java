@@ -39,7 +39,7 @@ public class GUI_GLUCOSA extends JFrame {
 
     public GUI_GLUCOSA() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 530, 420); // ← solo cambié el alto
+        setBounds(100, 100, 530, 420);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
@@ -84,8 +84,8 @@ public class GUI_GLUCOSA extends JFrame {
                     JOptionPane.showMessageDialog(null, "Introduce con formato AAAA-MM-DD");
                     return;
                 }
-                String nombre = textField_1.getText(); // ← bug corregido
-                float glucosa = Float.parseFloat(textField_2.getText()); // ← bug corregido
+                String nombre = textField_1.getText(); 
+                float glucosa = Float.parseFloat(textField_2.getText()); 
                 datos.add(new Manejoregistro(nombre, glucosa, fecha));
                 JOptionPane.showMessageDialog(null, "Registrado correctamente");
             }
