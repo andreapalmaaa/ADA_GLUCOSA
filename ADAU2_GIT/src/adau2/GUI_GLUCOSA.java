@@ -1,4 +1,4 @@
-package ada_glucosa;
+package adau2
 
 import java.awt.EventQueue;
 import javax.swing.*;
