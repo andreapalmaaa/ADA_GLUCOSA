@@ -1,18 +1,12 @@
 package adau2;
 
-
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JSeparator;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.event.ActionEvent;
 
 public class GUI_GLUCOSA extends JFrame {
@@ -39,40 +33,46 @@ public class GUI_GLUCOSA extends JFrame {
 
     public GUI_GLUCOSA() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 530, 420);
+        setBounds(100, 100, 530, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
 
-        
+        JToolBar barraSuperior = new JToolBar();
+        barraSuperior.setBounds(0, 0, 533, 30);
+        contentPane.add(barraSuperior);
+
+        JButton btnHistorial = new JButton("HISTORIAL");
+        barraSuperior.add(btnHistorial);
+
         JLabel lblNewLabel = new JLabel("Nuevo registro");
-        lblNewLabel.setBounds(210, 11, 109, 42);
+        lblNewLabel.setBounds(210, 35, 109, 42);
         contentPane.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("Nombre:");
-        lblNewLabel_1.setBounds(95, 65, 61, 14);
+        lblNewLabel_1.setBounds(95, 88, 61, 14);
         contentPane.add(lblNewLabel_1);
 
         JLabel lblNewLabel_2 = new JLabel("Nivel de glucosa:");
-        lblNewLabel_2.setBounds(74, 119, 109, 14);
+        lblNewLabel_2.setBounds(74, 142, 109, 14);
         contentPane.add(lblNewLabel_2);
 
         JLabel lblNewLabel_3 = new JLabel("Fecha de registro:");
-        lblNewLabel_3.setBounds(201, 161, 118, 14);
+        lblNewLabel_3.setBounds(201, 184, 118, 14);
         contentPane.add(lblNewLabel_3);
 
         textField = new JTextField((java.time.LocalDate.now().toString()));
-        textField.setBounds(201, 195, 107, 20);
+        textField.setBounds(201, 218, 107, 20);
         contentPane.add(textField);
         textField.setColumns(10);
 
         textField_1 = new JTextField();
-        textField_1.setBounds(193, 62, 126, 20);
+        textField_1.setBounds(193, 85, 126, 20);
         contentPane.add(textField_1);
         textField_1.setColumns(10);
 
         textField_2 = new JTextField();
-        textField_2.setBounds(193, 116, 126, 20);
+        textField_2.setBounds(193, 139, 126, 20);
         contentPane.add(textField_2);
         textField_2.setColumns(10);
 
@@ -84,16 +84,41 @@ public class GUI_GLUCOSA extends JFrame {
                     JOptionPane.showMessageDialog(null, "Introduce con formato AAAA-MM-DD");
                     return;
                 }
-                String nombre = textField_1.getText(); 
-                float glucosa = Float.parseFloat(textField_2.getText()); 
+                String nombre = textField_1.getText();
+                float glucosa = Float.parseFloat(textField_2.getText());
                 datos.add(new Manejoregistro(nombre, glucosa, fecha));
                 JOptionPane.showMessageDialog(null, "Registrado correctamente");
             }
         });
-        btnNewButton.setBounds(201, 244, 118, 33);
+        btnNewButton.setBounds(201, 267, 118, 33);
         contentPane.add(btnNewButton);
 
-        //Buscador Emilio
+        DefaultListModel modeloLista = new DefaultListModel();
+        JList listaResultados = new JList(modeloLista);
+        JScrollPane scrollResultados = new JScrollPane(listaResultados);
+        scrollResultados.setBounds(40, 315, 440, 80);
+        contentPane.add(scrollResultados);
+
+        btnHistorial.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (datos.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "Lista vacía.");
+                } else {
+                    Collections.sort(datos, new Comparator<Manejoregistro>() {
+                        public int compare(Manejoregistro r1, Manejoregistro r2) {
+                            return r1.getNombre().toLowerCase().compareTo(r2.getNombre().toLowerCase());
+                        }
+                    });
+                    modeloLista.removeAllElements();
+                    for (int i = 0; i < datos.size(); i++) {
+                        Manejoregistro aux = datos.get(i);
+                        String info = aux.getNombre() + " - " + aux.getGlucosa() + " mg - " + aux.getFecha();
+                        modeloLista.addElement(info);
+                    }
+                }
+            }
+        });
+
         JPanel panelBuscador = new JPanel();
         panelBuscador.setLayout(null);
 
@@ -102,7 +127,10 @@ public class GUI_GLUCOSA extends JFrame {
         lblBuscTitulo.setBounds(160, 20, 200, 22);
         panelBuscador.add(lblBuscTitulo);
 
-   
+        JLabel lblNewLabel_1_1 = new JLabel("Nombre:");
+        lblNewLabel_1_1.setBounds(60, 68, 61, 14);
+        panelBuscador.add(lblNewLabel_1_1);
+
         JTextField txtBuscar = new JTextField();
         txtBuscar.setBounds(135, 63, 180, 25);
         panelBuscador.add(txtBuscar);
@@ -142,7 +170,6 @@ public class GUI_GLUCOSA extends JFrame {
                     }
                 }
                 if (!encontrado) {
-                	
                     lblResGlucosa.setText("—");
                     lblResFecha.setText("—");
                 }
@@ -154,10 +181,6 @@ public class GUI_GLUCOSA extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Registro", contentPane);
         tabbedPane.addTab("Buscador", panelBuscador);
-        
-        JLabel lblNewLabel_1_1 = new JLabel("Nombre:");
-        lblNewLabel_1_1.setBounds(60, 68, 61, 14);
-        panelBuscador.add(lblNewLabel_1_1);
         setContentPane(tabbedPane);
     }
 }
