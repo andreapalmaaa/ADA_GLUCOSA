@@ -101,10 +101,7 @@ public class GUI_GLUCOSA extends JFrame {
         lblBuscTitulo.setBounds(160, 20, 200, 22);
         panelBuscador.add(lblBuscTitulo);
 
-        JLabel lblBuscTag = new JLabel("Nombre:");
-        lblBuscTag.setBounds(60, 65, 70, 22);
-        panelBuscador.add(lblBuscTag);
-
+   
         JTextField txtBuscar = new JTextField();
         txtBuscar.setBounds(135, 63, 180, 25);
         panelBuscador.add(txtBuscar);
@@ -113,34 +110,18 @@ public class GUI_GLUCOSA extends JFrame {
         btnBuscar.setBounds(325, 62, 90, 27);
         panelBuscador.add(btnBuscar);
 
-        JSeparator sep = new JSeparator();
-        sep.setBounds(40, 108, 430, 10);
-        panelBuscador.add(sep);
-
-        JLabel lblResTitle = new JLabel("Resultado:");
-        lblResTitle.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 11));
-        lblResTitle.setBounds(60, 120, 100, 20);
-        panelBuscador.add(lblResTitle);
-
-        JLabel lblTagN = new JLabel("Nombre:");
-        lblTagN.setBounds(60, 155, 70, 20);
-        panelBuscador.add(lblTagN);
-        JLabel lblResNombre = new JLabel("—");
-        lblResNombre.setBounds(135, 155, 250, 20);
-        panelBuscador.add(lblResNombre);
-
         JLabel lblTagG = new JLabel("Glucosa:");
-        lblTagG.setBounds(60, 190, 70, 20);
+        lblTagG.setBounds(60, 110, 70, 20);
         panelBuscador.add(lblTagG);
         JLabel lblResGlucosa = new JLabel("—");
-        lblResGlucosa.setBounds(135, 190, 250, 20);
+        lblResGlucosa.setBounds(135, 110, 250, 20);
         panelBuscador.add(lblResGlucosa);
 
         JLabel lblTagF = new JLabel("Fecha:");
-        lblTagF.setBounds(60, 225, 70, 20);
+        lblTagF.setBounds(60, 141, 70, 20);
         panelBuscador.add(lblTagF);
         JLabel lblResFecha = new JLabel("—");
-        lblResFecha.setBounds(135, 225, 250, 20);
+        lblResFecha.setBounds(135, 141, 250, 20);
         panelBuscador.add(lblResFecha);
 
         ActionListener buscarAction = new ActionListener() {
@@ -153,7 +134,6 @@ public class GUI_GLUCOSA extends JFrame {
                 boolean encontrado = false;
                 for (Manejoregistro r : datos) {
                     if (r.getNombre().toLowerCase().contains(busqueda)) {
-                        lblResNombre.setText(r.getNombre());
                         lblResGlucosa.setText(r.getGlucosa() + " mg/dL");
                         lblResFecha.setText(r.getFecha());
                         encontrado = true;
@@ -161,7 +141,7 @@ public class GUI_GLUCOSA extends JFrame {
                     }
                 }
                 if (!encontrado) {
-                    lblResNombre.setText("No encontrado");
+                	
                     lblResGlucosa.setText("—");
                     lblResFecha.setText("—");
                 }
@@ -173,6 +153,10 @@ public class GUI_GLUCOSA extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Registro", contentPane);
         tabbedPane.addTab("Buscador", panelBuscador);
+        
+        JLabel lblNewLabel_1_1 = new JLabel("Nombre:");
+        lblNewLabel_1_1.setBounds(60, 68, 61, 14);
+        panelBuscador.add(lblNewLabel_1_1);
         setContentPane(tabbedPane);
     }
 }
